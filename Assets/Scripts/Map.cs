@@ -26,7 +26,9 @@ public class Map : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.CompareTag("PlayerTank")) {
+        GameObject go = collision.gameObject;
+        if (!go.CompareTag("Bullet")) {
+            //只有子弹才能销毁TileMap障碍物
             return;
         }
 
@@ -38,7 +40,7 @@ public class Map : MonoBehaviour
 
         if (TileMapTank.HasTile(cellPos))
         {
-            Debug.Log("销毁," + cellPos);
+            Debug.Log("销毁tilemap 障碍物," + cellPos);
 
             //销毁指定tile
             TileMapTank.SetTile(cellPos, null);

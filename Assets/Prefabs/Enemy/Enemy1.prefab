@@ -144,10 +144,10 @@ MonoBehaviour:
   MoveSpeed: 3
   BulletSeed: 6
   TankSprite:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 3348c3d1a93bce84fba2264f6a8458f4, type: 3}
+  - {fileID: 21300016, guid: 3348c3d1a93bce84fba2264f6a8458f4, type: 3}
+  - {fileID: 21300032, guid: 3348c3d1a93bce84fba2264f6a8458f4, type: 3}
+  - {fileID: 21300048, guid: 3348c3d1a93bce84fba2264f6a8458f4, type: 3}
   Explode: {fileID: 8965126008426493928, guid: a21d758b9ed51a94b86ecd348cce8980, type: 3}
   Shild: {fileID: 1723071924950779185, guid: 059d32193ac38594ebf69cd07da97ca3, type: 3}
   BullerPrefab: {fileID: 6827812765760802197, guid: 96b65896729824ed499f748313ca8f80,

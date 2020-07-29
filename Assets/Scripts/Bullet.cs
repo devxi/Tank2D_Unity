@@ -53,7 +53,25 @@ public class Bullet : MonoBehaviour
 
         else if (BulletType == Contants.BulletType.Enemy)
         {
+            switch (collision.gameObject.tag)
+            {
+                case "PlayerTank":
+                    {
+                        //敌人子弹打玩家坦克
+                        Player player = collision.gameObject.GetComponent<Player>();
+                        if (player)
+                        {
+                            player.SendMessage("OnAttackByEnemy");
+                        }
+                        break;
+                    }
 
+                case "EnemyTank":
+                    {
+                        //敌人子弹不要打敌人
+                        return;
+                    }
+            }
         }
          effectAudio.PlayOneShot(BulletDestoryAudioClip);
         Destroy(gameObject);

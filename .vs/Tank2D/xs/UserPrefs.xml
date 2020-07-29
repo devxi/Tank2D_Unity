@@ -1,8 +1,11 @@
 ﻿<Properties StartupConfiguration="{80EE8F73-FAE5-3D90-0112-C9B98192C82E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Bullet.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player.cs" Line="128" Column="71" />
-      <File FileName="Assets/Scripts/Contants.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player.cs" Line="128" Column="47" />
+      <File FileName="Assets/Scripts/Contants.cs" />
+      <File FileName="Assets/Scripts/Enemy.cs" Line="175" Column="27" />
+      <File FileName="Assets/Scripts/Map.cs" Line="31" Column="33" />
+      <File FileName="Assets/Scripts/Bullet.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -10,11 +13,14 @@
           <Node name="Tank2D" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="Player.cs" selected="True" />
+                <Node name="Bullet.cs" selected="True" />
               </Node>
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
@@ -25,7 +31,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="af5bae6c-c9a6-4e26-a439-0627c20ab16e" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="8a256356-ee5d-4fbe-94fd-ea9b00eae892" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
