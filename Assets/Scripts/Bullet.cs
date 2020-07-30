@@ -14,48 +14,18 @@ public class Bullet : MonoBehaviour
         effectAudio = gameObject.AddComponent<AudioSource>();
     }
 
-    void Start()
-    {
-        
-    }
-    
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (BulletType == Contants.BulletType.Player)
+        switch (collision.gameObject.tag)
         {
-            switch (collision.gameObject.tag)
-            {
-                case "PlayerTank":
+            case "PlayerTank":
+                {
+                    if (BulletType == Contants.BulletType.Player)
                     {
+                        //玩家子弹不打玩家
                         return;
                     }
-
-                case "EnemyTank":
-                    {
-                        //玩家攻击敌人
-                        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-                        if (enemy) 
-                        {
-
-                            //去死吧
-                            enemy.SendMessage("Die");
-                        }
-
-                        break;
-                    }
-            }
-        }
-
-        else if (BulletType == Contants.BulletType.Enemy)
-        {
-            switch (collision.gameObject.tag)
-            {
-                case "PlayerTank":
+                    else if (BulletType == Contants.BulletType.Enemy)
                     {
                         //敌人子弹打玩家坦克
                         Player player = collision.gameObject.GetComponent<Player>();
@@ -63,17 +33,40 @@ public class Bullet : MonoBehaviour
                         {
                             player.SendMessage("OnAttackByEnemy");
                         }
-                        break;
                     }
+                    break;
 
-                case "EnemyTank":
+                }
+
+            case "EnemyTank":
+                {
+
+                    if (BulletType == Contants.BulletType.Player)
+                    {
+                        //玩家攻击敌人
+                        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                        if (enemy)
+                        {
+
+                            //去死吧
+                            enemy.SendMessage("Die");
+                        }
+                    }
+                    else if (BulletType == Contants.BulletType.Enemy)
                     {
                         //敌人子弹不要打敌人
                         return;
                     }
-            }
+
+                    break;
+                }
+            case "Bullet":
+                {
+                    //子弹打到子弹，相互抵消
+                    break;
+                }
         }
-         effectAudio.PlayOneShot(BulletDestoryAudioClip);
+        effectAudio.PlayOneShot(BulletDestoryAudioClip);
         Destroy(gameObject);
     }
 }

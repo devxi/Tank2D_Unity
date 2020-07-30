@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     public float MoveSpeed = 3.0f;
     public float BulletSeed = 6.0f;
     public Vector2 BornPosition;//出生坐标
-    public Sprite[] TankSprite;
 
     public GameObject Explode;//死亡爆炸效果
     public GameObject Shild;//护盾
@@ -25,7 +24,7 @@ public class Player : MonoBehaviour
     public AudioClip FireAudioClip;
     public AudioClip BoomAudioClip;
 
-    
+
 
     public float ShootCDTime = 0.5f; //射击cd
 
@@ -33,9 +32,9 @@ public class Player : MonoBehaviour
     private float invincibleTime = 3.0f;//无敌时间
     private bool isInvincible = true;//是否是无敌状态
     private SpriteRenderer sr;
-    
+
     private Rigidbody2D rigidbody2d;
-    
+
     private MoveDirection moveDir = MoveDirection.Up;
 
     public GameObject shildObj { get; private set; }
@@ -66,7 +65,7 @@ public class Player : MonoBehaviour
             Shoot();
         }
 
-   
+
         isInvincible = invincibleTime > 0;
         invincibleTime -= Time.deltaTime;
         if (!isInvincible)
@@ -84,7 +83,6 @@ public class Player : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-        SetMoveDir();
 
         if (x == 0 && y == 0)
         {
@@ -94,7 +92,7 @@ public class Player : MonoBehaviour
             {
                 moveAudio.Play();
             }
-            
+            animator.SetFloat("MoveSpeed", 0);
         }
         else
         {
@@ -103,56 +101,55 @@ public class Player : MonoBehaviour
             {
                 moveAudio.Play();
             }
+            SetMoveDir(x, y);
             DoMove(x, y);
         }
     }
 
     private void DoMove(float x, float y)
     {
-        transform.Translate(Vector2.right * x * MoveSpeed * Time.fixedDeltaTime);
-
+        Vector2 vx = Vector2.right * x * MoveSpeed * Time.fixedDeltaTime;
+        transform.Translate(vx);
+        animator.SetFloat("MoveSpeed", vx.magnitude);
         if (x != 0)
         {
             return;
         }
-
-        transform.Translate(Vector2.up * y * MoveSpeed * Time.fixedDeltaTime);
+        Vector2 vy = Vector2.up * y * MoveSpeed * Time.fixedDeltaTime;
+        transform.Translate(vy);
+        animator.SetFloat("MoveSpeed", vy.magnitude);
     }
 
-    private void SetMoveDir()
+    private void SetMoveDir(float x, float y)
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        if (x > 0.0f)
+        animator.SetFloat("Look X", x);
+        animator.SetFloat("Look Y", y);
+         
+        if (x.Equals(1))
         {
-            animator.SetInteger("Float_X", 1);
+
             moveDir = MoveDirection.Right;
-            sr.sprite = TankSprite[1];
             return;
         }
 
-        if (y > 0.0f)
+        if (y.Equals(1))
         {
-            animator.SetInteger("Float_Y", 1);
+
             moveDir = MoveDirection.Up;
-            sr.sprite = TankSprite[0];
             return;
         }
 
-        if (x < -0.0f)
+        if (x.Equals(-1))
         {
-            animator.SetInteger("Float_X", -1);
             moveDir = MoveDirection.Left;
-            sr.sprite = TankSprite[3];
             return;
         }
 
 
-         if (y < -0.0f)
+        if (y.Equals(-1))
         {
-            animator.SetInteger("Float_Y", -1);
+
             moveDir = MoveDirection.Down;
-            sr.sprite = TankSprite[2];
             return;
         }
 
@@ -207,8 +204,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnAttackByEnemy() {
-        if (isInvincible) {
+    private void OnAttackByEnemy()
+    {
+        if (isInvincible)
+        {
             return;
         }
         Die();
